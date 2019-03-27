@@ -1,0 +1,38 @@
+= Testattoo Documentation
+:author: David Avenante, Stephanie Parisot
+:toc: left
+:toclevels: 5
+:numbered: true
+:doctype: book
+:icons: font
+:homepage: https://www.testattoo.org
+:desc: This is the Testattoo documentation
+:imagesdir: images
+:basepath: ../../..
+
+image::logo.svg[Testatoo,align="center"]
+
+include::introduction.adoc[]
+
+include::design_and_architecture.adoc[]
+
+include::installation.adoc[]
+
+include::philosophy.adoc[]
+
+include::compatibility.adoc[]
+
+include::content_interaction.adoc[]
+
+include::testatoo_language.adoc[]
+
+include::BDD_style.adoc[]
+
+include::components_reference.adoc[]
+
+include::html5_bundle.adoc[]
+
+include::create_new_component.adoc[]
+
+include::create_new_bundle.adoc[]
+

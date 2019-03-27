@@ -1,0 +1,4 @@
+moduleName=testattoo
+moduleVersion=1
+extensionClasses=org.testattoo.core.internal.GroovyExtensions
+staticExtensionClasses=

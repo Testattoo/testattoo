@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.testattoo</groupId>
+  <artifactId>testattoo</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Testattoo</name>
+  <inceptionYear>2019</inceptionYear>
+
+  <url>http://www.testatoo.org</url>
+
+  <scm>
+    <connection>scm:git:git@github.com:Testattoo/testattoo-parent-pom.git</connection>
+    <developerConnection>scm:git:git@github.com:Testattoo/testattoo-parent-pom.git</developerConnection>
+    <url>http://github.com/Testattoo/testattoo-parent-pom</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+
+    <groovy.version>2.5.6</groovy.version>
+
+    <!-- Tests -->
+    <junit.jupiter.version>5.4.0</junit.jupiter.version>
+    <mockito-core.version>2.21.0</mockito-core.version>
+    <hamcrest.version>2.1</hamcrest.version>
+
+    <!-- Plugins -->
+    <gmavenplus-plugin.version>1.6.2</gmavenplus-plugin.version>
+    <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+    <license-maven-plugin.version>3.0</license-maven-plugin.version>
+    <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+    <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
+    <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+  </properties>
+
+  <licenses>
+    <license>
+      <name>Apache License 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <modules>
+    <module>testattoo-core</module>
+    <module>documentation</module>
+  </modules>
+
+  <developers>
+    <developer>
+      <id>altus34</id>
+      <name>David Avenante</name>
+      <email>d.avenante@gmail.com</email>
+      <organization>Ovea</organization>
+      <organizationUrl>http://www.ovea.com/</organizationUrl>
+      <timezone>-5</timezone>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>mathieucarbou</id>
+      <name>Mathieu Carbou</name>
+      <email>mathieu.carbou@gmail.com</email>
+      <organization>Ovea</organization>
+      <organizationUrl>http://www.ovea.com/</organizationUrl>
+      <timezone>-5</timezone>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>stephi</id>
+      <name>Stephanie Parisot</name>
+      <email>stephanie.parisot@gmail.com</email>
+      <organization>Ovea</organization>
+      <organizationUrl>http://www.ovea.com/</organizationUrl>
+      <timezone>-5</timezone>
+      <roles>
+        <role>product owner</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>${gmavenplus-plugin.version}</version>
+        <configuration>
+          <verbose>true</verbose>
+          <invokeDynamic>false</invokeDynamic>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>addSources</goal>
+              <goal>addTestSources</goal>
+              <goal>compile</goal>
+              <goal>compileTests</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+            <type>pom</type>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-templates</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-json</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest</artifactId>
+        <version>${hamcrest.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.jupiter.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit.jupiter.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>${mockito-core.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>ovea-oss-staging</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ovea-oss-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
