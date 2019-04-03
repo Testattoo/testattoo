@@ -32,6 +32,7 @@
     <junit.jupiter.version>5.4.0</junit.jupiter.version>
     <mockito-core.version>2.21.0</mockito-core.version>
     <hamcrest.version>2.1</hamcrest.version>
+    <webdrivermanager.version>3.1.1</webdrivermanager.version>
 
     <!-- Plugins -->
     <gmavenplus-plugin.version>1.6.2</gmavenplus-plugin.version>
@@ -53,6 +54,8 @@
 
   <modules>
     <module>testattoo-core</module>
+    <module>testatoo-web-engine</module>
+    <module>testatoo-bundle-html5</module>
     <module>documentation</module>
   </modules>
 

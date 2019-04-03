@@ -125,6 +125,8 @@ class Testattoo {
     /**
      * Actions
      */
+    static void visit(String uri) { Browser.open(uri) }
+
     static void check(Checkable c) {
         if (!c.enabled())
             throw new ComponentException("${c.class.simpleName} ${c} is disabled and cannot be checked")
