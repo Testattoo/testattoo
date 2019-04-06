@@ -41,7 +41,7 @@ class Component implements Clickable, Draggable {
         this.meta = meta
     }
 
-    String id() throws ComponentException {
+    String id() {
         meta.metaInfo(this).id
     }
 
@@ -101,7 +101,7 @@ class Component implements Clickable, Draggable {
     @Override
     boolean equals(o) {
         if (this.is(o)) return true
-        if (getClass() != o.class) return false
+        if (this.class != o.class) return false
         Component component = (Component) o
         id() == component.id()
     }
@@ -110,7 +110,7 @@ class Component implements Clickable, Draggable {
     int hashCode() { id().hashCode() }
 
     @Override
-    String toString() { getClass().simpleName + ":${this.id()}" }
+    String toString() { this.class.simpleName + ":${this.id()}" }
 
     Object asType(Class clazz) {
         if (Component.isAssignableFrom(clazz)) {

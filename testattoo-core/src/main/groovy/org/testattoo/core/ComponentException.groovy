@@ -15,6 +15,9 @@
  */
 package org.testattoo.core
 
+/**
+ * @author David Avenante (d.avenante@gmail.com)
+ */
 public class ComponentException extends RuntimeException {
     /**
      * Constructs a new exception with the specified detail message.

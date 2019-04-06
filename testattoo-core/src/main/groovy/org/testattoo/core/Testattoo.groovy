@@ -28,6 +28,7 @@ import org.testattoo.core.input.DragBuilder
 import org.testattoo.core.input.Key
 import org.testattoo.core.input.Keyboard
 import org.testattoo.core.input.Mouse
+import org.testattoo.core.internal.CachedMetaData
 import org.testattoo.core.internal.Wait
 import org.testattoo.core.support.*
 import org.testattoo.core.support.property.InputSupport
@@ -36,10 +37,29 @@ import org.testattoo.core.support.property.InputSupport
  * @author Mathieu Carbou (mathieu.carbou@gmail.com)
  */
 class Testattoo {
+    static {
+        config.scan 'org.testattoo.bundle'
+    }
+
     /**
-     * Access testatto config
+     * Access testattoo config
      */
     static Config config = new Config()
+
+    /**
+     * Create a component
+     */
+    static Component $(String expression) {
+        new Component(new CachedMetaData(idProvider: new jQueryIdProvider(expression, true)))
+    }
+
+    /**
+     * Creates a list of component
+     */
+    static List $$(String expression, Class clazz = Component) {
+        Components components = new Components(clazz, new CachedMetaData(idProvider: new jQueryIdProvider(expression, false)))
+        components.list()
+    }
 
     protected static mouse = new Mouse()
     protected static keyboard = new Keyboard()
@@ -188,6 +208,26 @@ class Testattoo {
 
         void to(Object value) {
             input.value(value)
+        }
+    }
+
+    static class Components<T extends Component> {
+        private final MetaDataProvider meta
+        private final Class<T> type
+        private List<T> components
+
+        Components(Class<T> type, MetaDataProvider meta) {
+            this.meta = meta
+            this.type = type
+        }
+
+        List<T> list() {
+            if (components == null) {
+                components = meta.metaInfos().collect {
+                    new Component(new CachedMetaData(idProvider: new jQueryIdProvider("#${it.id}", false))).asType(type)
+                } as List<T>
+            }
+            return Collections.unmodifiableList(components)
         }
     }
 }

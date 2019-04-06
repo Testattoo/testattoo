@@ -15,7 +15,10 @@
  */
 package org.testattoo.core
 
+import com.google.common.reflect.ClassPath
 import org.testattoo.core.component.Component
+import org.testattoo.core.internal.Identifiers
+import org.testattoo.core.internal.Log
 
 import java.time.Duration
 
@@ -29,6 +32,24 @@ class Config {
     Duration waitUntil = 2.seconds
 
     final Collection<Class<Component>> componentTypes = new HashSet<>()
+
+    /**
+     * Activate debug mode
+     */
+    static void setDebug(boolean debug) {
+        Log.debug = debug
+    }
+
+    /**
+     * Scan for packages containing custom component
+     */
+    void scan(String... packageNames) {
+        componentTypes.addAll(packageNames
+            .collect { ClassPath.from(Thread.currentThread().contextClassLoader).getTopLevelClassesRecursive(it) }
+            .flatten()
+            .collect { it.load() }
+            .findAll { Component.isAssignableFrom(it) && Identifiers.hasIdentifier(it) })
+    }
 
     /**
      * Sets the default evaluator to use

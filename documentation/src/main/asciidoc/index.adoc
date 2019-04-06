@@ -10,7 +10,7 @@
 :imagesdir: images
 :basepath: ../../..
 
-image::logo.svg[Testatoo,align="center"]
+image::logo.svg[Testattoo,align="center"]
 
 include::introduction.adoc[]
 
@@ -24,7 +24,7 @@ include::compatibility.adoc[]
 
 include::content_interaction.adoc[]
 
-include::testatoo_language.adoc[]
+include::testattoo_language.adoc[]
 
 include::BDD_style.adoc[]
 

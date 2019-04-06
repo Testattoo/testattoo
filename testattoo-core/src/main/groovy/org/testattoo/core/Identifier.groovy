@@ -20,6 +20,9 @@ import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import java.lang.annotation.Target
 
+/**
+ * @author David Avenante (d.avenante@gmail.com)
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)
 @interface Identifier {}

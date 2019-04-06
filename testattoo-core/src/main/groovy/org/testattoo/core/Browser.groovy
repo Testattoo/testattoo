@@ -1,7 +1,5 @@
 package org.testattoo.core
 
-import org.testattoo.core.Window
-
 import static org.testattoo.core.Testattoo.config
 
 /**

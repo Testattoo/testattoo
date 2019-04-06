@@ -51,7 +51,7 @@ class CachedMetaData implements MetaDataProvider {
     }
 
     @Override
-    List<MetaInfo> metaInfos() throws ComponentException {
+    List<MetaInfo> metaInfos() {
         idProvider.metaInfos()
     }
 }

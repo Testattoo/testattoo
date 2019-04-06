@@ -16,6 +16,7 @@
 package org.testattoo.core.component
 
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.testattoo.core.Evaluator
@@ -54,12 +55,14 @@ class ComponentTest {
     }
 
     @Test
+    @DisplayName("Should be initialized with a meta data provider")
     void should_be_initialized_with_a_meta_data_provider() {
         Component cmp = new Component(metaData)
         assert cmp.meta == metaData
     }
 
     @Test
+    @DisplayName("Should have identity on id")
     void should_have_identity_on_id() {
         Component cmp_1 = new Component(metaData)
         Component cmp_2 = new Component(metaData)
@@ -82,6 +85,7 @@ class ComponentTest {
     }
 
     @Test
+    @DisplayName("Should implement toString() based on ClassName and id")
     void should_implement_toString_based_on_class_name_and_id() {
         Component cmp_1 = new Component(metaData)
         when(metaData.metaInfo(any(Component))).thenReturn(new MetaInfo(id: 'cmpId_1'))
@@ -90,6 +94,7 @@ class ComponentTest {
     }
 
     @Test
+    @DisplayName("Should have generic behaviours delegated to evaluator")
     void should_have_generic_behaviours_delegated_to_evaluator() {
         String cmp_id = 'cmpId_1'
         Component component = new Component(metaData)

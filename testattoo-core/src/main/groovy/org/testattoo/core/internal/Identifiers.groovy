@@ -18,6 +18,7 @@ package org.testattoo.core.internal
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ScanResult
 import org.testattoo.core.ComponentException
+import org.testattoo.core.CssIdentifier
 import org.testattoo.core.Identifier
 import org.testattoo.core.component.Component
 
@@ -34,8 +35,9 @@ class Identifiers {
         .scan()
 
     static Map factories = [
-//        (CssIdentifier): { CssIdentifier annotation -> return "it.is('${annotation.value()}')" }
+        (CssIdentifier): { CssIdentifier annotation -> return "it.is('${annotation.value()}')" }
     ]
+
 
     static boolean hasIdentifier(Class<? extends Component> c) {
         return c.annotations.find { it.annotationType().isAnnotationPresent(Identifier) }

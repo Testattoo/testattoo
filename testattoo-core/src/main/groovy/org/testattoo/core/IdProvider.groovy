@@ -19,5 +19,5 @@ package org.testattoo.core
  * @author David Avenante (d.avenante@gmail.com)
  */
 interface IdProvider {
-    List<MetaInfo> metaInfos() throws ComponentException
+    List<MetaInfo> metaInfos()
 }

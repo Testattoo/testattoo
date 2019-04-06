@@ -15,6 +15,8 @@
  */
 package org.testattoo.core
 
+import static org.testattoo.core.Testattoo.config
+
 /**
  * @author David Avenante (d.avenante@gmail.com)
  */
@@ -25,14 +27,14 @@ class Window {
 
     Window(String id) { this.id = id }
 
-    void close() { Testattoo.config.evaluator.closeWindow(this.id) }
+    void close() { config.evaluator.closeWindow(this.id) }
 
     @Override
     String toString() { this.id }
 
     boolean equals(o) {
         if (this.is(o)) return true
-        if (getClass() != o.class) return false
+        if (this.class != o.class) return false
 
         Window window = (Window) o
         id == window.id
