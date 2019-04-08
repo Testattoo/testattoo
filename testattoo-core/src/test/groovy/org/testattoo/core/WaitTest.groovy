@@ -19,14 +19,11 @@ import io.github.bonigarcia.wdm.WebDriverManager
 import io.undertow.Undertow
 import org.hamcrest.Description
 import org.hamcrest.StringDescription
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.testattoo.Server
+import org.testattoo.bundle.html5.Button
 import org.testattoo.core.evaluator.WebDriverEvaluator
 
 import static org.junit.jupiter.api.Assertions.fail
@@ -58,7 +55,7 @@ class WaitTest {
 
     @AfterAll
     static void tearDown() {
-        driver.close()
+        config.evaluator.close()
         server.stop()
     }
 
@@ -107,14 +104,6 @@ class WaitTest {
                 .appendText('\n     but: is enabled')
 
             assert e.message == description.toString()
-        }
-    }
-
-    @CssIdentifier('button,input[type=button]')
-    class Button extends org.testattoo.core.component.Button {
-        @Override
-        String text() {
-            config.evaluator.eval(this.id(), "it.is('input') ? it.val() : it.text().trim()")
         }
     }
 }

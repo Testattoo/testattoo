@@ -20,6 +20,7 @@ import org.junit.jupiter.api.*
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.testattoo.Server
+import org.testattoo.core.component.Component
 import org.testattoo.core.evaluator.WebDriverEvaluator
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver
@@ -46,13 +47,12 @@ class BrowserTest {
         config.evaluator = new WebDriverEvaluator(driver)
 
         config.waitUntil = 10.seconds
-        visit BASE_URL + 'wait.html'
     }
 
     @AfterAll
     static void tearDown() {
         config.waitUntil = 2.seconds
-        driver.close()
+        config.evaluator.close()
         server.stop()
     }
 
@@ -89,28 +89,30 @@ class BrowserTest {
         assert url == BASE_URL + 'keyboard.html'
     }
 
-//    @Test
-//    @DisplayName("Should manage Windows")
-//    void should_manage_windows() {
-//        open BASE_URL + 'index.html'
-//        Component link = $('#link') as Component
-//        Component form = $('#dsl-form') as Component
-//
-//        assert windows.size() == 1
-//        assert link.available()
-//        assert !form.available()
-//
-//        String main_window_id = windows[0].id
-//
-//        clickOn link
-//
-//        waitUntil({ windows.size() == 2 })
-//        switchTo(windows[1])
-//        assert form.available()
-//
-//        windows[1].close()
-//        waitUntil({ windows.size() == 1 })
-//        assert windows[0].id == main_window_id
-//        assert windows[0].toString() == main_window_id
-//    }
+    @Test
+    @DisplayName("Should manage Windows")
+    void should_manage_windows() {
+        open BASE_URL + 'index.html'
+
+        Component link = $('#link') as Component
+        Component form = $('#dsl-form') as Component
+
+        assert windows.size() == 1
+        assert link.available()
+        assert !form.available()
+
+        String main_window_id = windows[0].id
+
+        clickOn link
+
+        waitUntil({ windows.size() == 2 })
+        switchTo(windows[1])
+        assert form.available()
+
+        windows[1].close()
+        waitUntil({ windows.size() == 1 })
+        assert windows[0].id == main_window_id
+        assert windows[0].toString() == main_window_id
+
+    }
 }

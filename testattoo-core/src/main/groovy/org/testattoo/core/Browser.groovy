@@ -23,12 +23,13 @@ class Browser {
     static void open(String url) { config.evaluator.open(url) }
 
     static List<Window> getWindows() {
-        List<Window> windows = new ArrayList<>()
         config.evaluator.windowIds.each { String id ->
-            windows.add(new Window(id))
+            if(!Window.windows.any { it.id == id }) {
+                Window.windows.add(new Window(id))
+            }
         }
-        return windows
+        return Window.windows
     }
 
-    static void switchTo(Window window) { config.evaluator.switchToWindow(window.id) }
+    static void switchTo(Window window) { window.switchTo(window) }
 }

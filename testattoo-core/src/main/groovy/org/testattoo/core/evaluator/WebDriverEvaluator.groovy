@@ -95,8 +95,12 @@ class WebDriverEvaluator implements Evaluator {
     }
 
     @Override
-    void switchToWindow(String id) {
+    String switchToWindow(String id) {
         webDriver.switchTo().window(id)
+    }
+
+    String currentWindow() {
+        return webDriver.windowHandle;
     }
 
     @Override
@@ -142,7 +146,7 @@ class WebDriverEvaluator implements Evaluator {
         Collection<String> text = []
         keys.each { k ->
             if (k instanceof Key && text) throw new IllegalArgumentException('Cannot type a modifier after some text')
-            if (k instanceof Key && k in [Key.SHIFT, Key.CTRL, Key.ALT]) modifiers << k
+            if (k instanceof Key && k in [SHIFT, CTRL, ALT]) modifiers << k
             else text << k as String
         }
         modifiers.each { action.keyDown(KeyConverter.convert(it)) }

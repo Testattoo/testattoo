@@ -56,7 +56,7 @@ class InputFieldTest {
 
     @AfterAll
     static void tearDown() {
-        driver.close()
+        config.evaluator.close()
         server.stop()
     }
 

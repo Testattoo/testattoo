@@ -26,8 +26,8 @@ import org.testattoo.core.support.property.SelectedItemSupport
 import static org.hamcrest.MatcherAssert.assertThat
 import static org.junit.jupiter.api.Assertions.fail
 import static org.mockito.Mockito.when
-import static org.testattoo.core.Testattoo.selectedItem
 import static org.testattoo.core.hamcrest.Matchers.has
+import static org.testattoo.core.hamcrest.Matchers.selectedItem
 
 /**
  * @author David Avenante (d.avenante@gmail.com)

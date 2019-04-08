@@ -20,14 +20,25 @@ import static org.testattoo.core.Testattoo.config
 /**
  * @author David Avenante (d.avenante@gmail.com)
  */
-
-// TODO move to component
 class Window {
     final String id
+    private String parent
+    protected static List<Window> windows = []
 
-    Window(String id) { this.id = id }
+    Window(String id) {
+        this.id = id
+    }
 
-    void close() { config.evaluator.closeWindow(this.id) }
+    void switchTo(Window window) {
+        parent = config.evaluator.currentWindow()
+        config.evaluator.switchToWindow(window.id)
+    }
+
+    void close() {
+        config.evaluator.closeWindow(id)
+        windows.removeAll { it.id == id }
+        if(parent) config.evaluator.switchToWindow(parent)
+    }
 
     @Override
     String toString() { this.id }

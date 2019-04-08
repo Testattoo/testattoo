@@ -15,7 +15,9 @@
  */
 package org.testattoo.core
 
-import com.google.common.reflect.ClassPath
+import io.github.classgraph.ClassGraph
+import io.github.classgraph.ClassInfo
+import io.github.classgraph.ClassInfoList
 import org.testattoo.core.component.Component
 import org.testattoo.core.internal.Identifiers
 import org.testattoo.core.internal.Log
@@ -45,9 +47,17 @@ class Config {
      */
     void scan(String... packageNames) {
         componentTypes.addAll(packageNames
-            .collect { ClassPath.from(Thread.currentThread().contextClassLoader).getTopLevelClassesRecursive(it) }
+            .collect {new ClassGraph().whitelistPackages(it).scan().getAllStandardClasses()
+            .filter(new ClassInfoList.ClassInfoFilter() {
+                @Override
+                boolean accept(ClassInfo info) {
+                    return info.className.indexOf('$') == -1
+                }
+            })}
             .flatten()
-            .collect { it.load() }
+            .collect {
+                it.loadClass()
+            }
             .findAll { Component.isAssignableFrom(it) && Identifiers.hasIdentifier(it) })
     }
 
@@ -55,4 +65,7 @@ class Config {
      * Sets the default evaluator to use
      */
     Evaluator evaluator
+
+
+
 }

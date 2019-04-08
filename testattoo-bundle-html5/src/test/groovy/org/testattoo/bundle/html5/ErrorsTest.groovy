@@ -15,6 +15,7 @@
  */
 package org.testattoo.bundle.html5
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.testattoo.bundle.html5.input.InputTypeCheckBox
 import org.testattoo.bundle.html5.input.InputTypeNumber
@@ -31,23 +32,12 @@ import static org.testattoo.core.Testattoo.*
 /**
  * @author David Avenante (d.avenante@gmail.com)
  */
+@DisplayName("")
 class ErrorsTest {
 //    @BeforeClass
 //    static void before() {
 //        visit BASE_URL + 'error.html'
 //    }
-
-    @Test
-    void should_not_check_already_checked_element() {
-        InputTypeCheckBox checkbox = $('#checkbox_1') as InputTypeCheckBox
-        checkbox.should { be checked }
-
-        try {
-            check checkbox
-        } catch (ComponentException e) {
-            assert e.message == 'InputTypeCheckBox InputTypeCheckBox:checkbox_1 is already checked and cannot be checked'
-        }
-    }
 
     @Test
     void should_not_be_able_to_submit_form_if_no_submit_button_available() {
@@ -68,24 +58,6 @@ class ErrorsTest {
             fail()
         } catch (ComponentException e) {
             assert e.message == 'Cannot reset form without reset button'
-        }
-    }
-
-    @Test
-    void should_throw_an_error_on_invalid_click_sequence() {
-        Form form = $('#form') as Form
-        try {
-            [CTRL, 'test', ALT].click form
-            fail()
-        } catch (IllegalArgumentException e) {
-            assert e.message == 'Cannot type a modifier after some text'
-        }
-
-        try {
-            config.evaluator.click('form', [RIGHT, DOUBLE], [])
-            fail()
-        } catch (IllegalArgumentException e) {
-            assert e.message == 'Invalid click sequence'
         }
     }
 

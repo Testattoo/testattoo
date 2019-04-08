@@ -18,6 +18,10 @@ package org.testattoo.core
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.testattoo.bundle.html5.BigButton
+import org.testattoo.bundle.html5.CustomElement_1
+import org.testattoo.bundle.html5.CustomElement_2
+import org.testattoo.bundle.html5.InvalidComponent
 import org.testattoo.core.component.Component
 
 import static org.junit.jupiter.api.Assertions.fail
@@ -92,7 +96,7 @@ class SelectorTest {
             InvalidComponent cmp = $('expression') as InvalidComponent
             cmp.should { be visible }
         } catch (ComponentException e) {
-            assert e.message == 'Missing @Identifier annotation on type org.testattoo.core.SelectorTest$InvalidComponent'
+            assert e.message == 'Missing @Identifier annotation on type org.testattoo.bundle.html5.InvalidComponent'
         }
 
         config.componentTypes.add(BigButton)
@@ -116,16 +120,4 @@ class SelectorTest {
         List<CustomElement_1> elements = $$('.btn', CustomElement_1)
         assert elements.size() == 3
     }
-
-    private class InvalidComponent extends Component {}
-
-    private class BigButton extends CustomElement_1 {
-        boolean isBig() { true }
-    }
-
-    @CssIdentifier('custom_1')
-    class CustomElement_1 extends Component {}
-
-    @CssIdentifier('custom_2')
-    class CustomElement_2 extends Component {}
 }

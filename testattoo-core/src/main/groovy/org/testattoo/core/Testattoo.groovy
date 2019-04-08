@@ -16,9 +16,8 @@
 package org.testattoo.core
 
 import org.hamcrest.Matcher
-import org.testattoo.core.component.Component
-import org.testattoo.core.component.Group
-import org.testattoo.core.component.Item
+import org.testattoo.core.component.*
+import org.testattoo.core.component.field.*
 import org.testattoo.core.component.datagrid.Cell
 import org.testattoo.core.component.datagrid.Column
 import org.testattoo.core.component.datagrid.Row
@@ -192,6 +191,55 @@ class Testattoo {
     static void type(Key key) { type([key]) }
 
     static void type(String text) { type([text]) }
+
+    // Generic Component Factory
+    static Button button(String text) { ComponentFactory.button(text) }
+
+    static Radio radio(String label) { ComponentFactory.radio(label) }
+
+    static CheckBox checkbox(String label) { ComponentFactory.checkbox(label) }
+
+    static Dropdown dropdown(String label) { ComponentFactory.dropdown(label) }
+
+    static ListBox listBox(String label) { ComponentFactory.listBox(label) }
+
+    static Group group(String value) { ComponentFactory.group(value) }
+
+    static Item item(String value) { ComponentFactory.item(value) }
+
+    static Heading heading(String text) { ComponentFactory.heading(text) }
+
+    static Panel panel(String title) { ComponentFactory.panel(title) }
+
+    static Link link(String text) { ComponentFactory.link(text) }
+
+    static PasswordField passwordField(String value) { ComponentFactory.passwordField(value) }
+
+    static TextField textField(String value) { ComponentFactory.textField(value) }
+
+    static SearchField searchField(String value) { ComponentFactory.searchField(value) }
+
+    static EmailField emailField(String value) { ComponentFactory.emailField(value) }
+
+    static URLField urlField(String value) { ComponentFactory.urlField(value) }
+
+    static NumberField numberField(String value) { ComponentFactory.numberField(value) }
+
+    static RangeField rangeField(String value) { ComponentFactory.rangeField(value) }
+
+    static DateField dateField(String value) { ComponentFactory.dateField(value) }
+
+    static ColorField colorField(String value) { ComponentFactory.colorField(value) }
+
+    static DateTimeField dateTimeField(String value) { ComponentFactory.dateTimeField(value) }
+
+    static MonthField monthField(String value) { ComponentFactory.monthField(value) }
+
+    static PhoneField phoneField(String value) { ComponentFactory.phoneField(value) }
+
+    static TimeField timeField(String value) { ComponentFactory.timeField(value) }
+
+    static WeekField weekField(String value) { ComponentFactory.weekField(value) }
 
     static void waitUntil(Closure c, Matcher what = null) { wait.waitUntil(c, what) }
 

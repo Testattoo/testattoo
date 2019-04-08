@@ -21,12 +21,10 @@ import org.junit.jupiter.api.*
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.testattoo.Server
+import org.testattoo.bundle.html5.Input
 import org.testattoo.core.Browser
-import org.testattoo.core.CssIdentifier
 import org.testattoo.core.component.Component
 import org.testattoo.core.evaluator.WebDriverEvaluator
-import org.testattoo.core.support.property.ValueSupport
-import org.testattoo.core.support.state.EmptySupport
 
 import static org.testattoo.core.Testattoo.*
 import static org.testattoo.core.input.Key.*
@@ -55,7 +53,7 @@ class KeyboardTest {
 
     @AfterAll
     static void tearDown() {
-        driver.close()
+        config.evaluator.close()
         server.stop()
     }
 
@@ -138,21 +136,5 @@ class KeyboardTest {
         textField.should { have value('') }
         type(SHIFT + '`1234567890-=')
         textField.should { have value('~!@#$%^&*()_+') }
-    }
-
-    @CssIdentifier('input[type=text]')
-    class Input extends Component implements ValueSupport, EmptySupport {
-        Object value() {
-            config.evaluator.eval(id(), "it.val()")
-        }
-
-        void clear() {
-            this.click()
-            config.evaluator.runScript("\$('[id=\"${id()}\"]').val('')")
-        }
-
-        boolean empty() {
-            config.evaluator.check(id(), "\$.trim(it.val()).length == 0")
-        }
     }
 }

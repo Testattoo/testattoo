@@ -247,4 +247,71 @@ class ActionTest {
             assert e.message.endsWith('is already unselected and cannot be deselected')
         }
     }
+
+    @Test
+    @DisplayName("Should not check already checked element")
+    void should_not_check_already_checked_element() {
+        CheckBox checkbox = mock(CheckBox)
+        when(checkbox.checked()).thenReturn(true)
+        when(checkbox.enabled()).thenReturn(true)
+
+        checkbox.should { be checked }
+
+        try {
+            check checkbox
+        } catch (ComponentException e) {
+            assert e.message.endsWith('is already checked and cannot be checked')
+        }
+    }
+
+    @Test
+    @DisplayName("Should not check disabled element")
+    void should_not_check_a_disabled_element() {
+        CheckBox checkbox = mock(CheckBox)
+        when(checkbox.checked()).thenReturn(false)
+        when(checkbox.enabled()).thenReturn(false)
+
+        checkbox.should { be Testattoo.unchecked }
+
+        try {
+            check checkbox
+        } catch (ComponentException e) {
+            assert e.message.endsWith('is disabled and cannot be checked')
+        }
+    }
+
+    @Test
+    @DisplayName("Should not uncheck already unchecked element")
+    void should_not_uncheck_already_unchecked_element() {
+        CheckBox checkbox = mock(CheckBox)
+        when(checkbox.checked()).thenReturn(false)
+        when(checkbox.enabled()).thenReturn(true)
+
+        checkbox.should { be unchecked }
+
+        try {
+            uncheck checkbox
+        } catch (ComponentException e) {
+            assert e.message.endsWith('is already unchecked and cannot be unchecked')
+        }
+    }
+
+    @Test
+    @DisplayName("Should not uncheck disabled element")
+    void should_not_uncheck_a_disabled_element() {
+        CheckBox checkbox = mock(CheckBox)
+        when(checkbox.checked()).thenReturn(false)
+        when(checkbox.enabled()).thenReturn(false)
+
+        checkbox.should { be unchecked }
+
+        try {
+            uncheck checkbox
+        } catch (ComponentException e) {
+            assert e.message.endsWith('is disabled and cannot be unchecked')
+        }
+    }
+
+
+
 }

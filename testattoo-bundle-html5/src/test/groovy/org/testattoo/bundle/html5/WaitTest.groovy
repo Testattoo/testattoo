@@ -31,7 +31,6 @@ import org.testattoo.core.evaluator.WebDriverEvaluator
 
 import static org.junit.jupiter.api.Assertions.fail
 import static org.testattoo.bundle.html5.Server.undertow
-import static org.testattoo.core.Selector.$
 import static org.testattoo.core.Testattoo.*
 
 /**
@@ -60,7 +59,7 @@ class WaitTest {
     @AfterAll
     static void tearDown() {
         config.waitUntil = 2.seconds
-        driver.close()
+        config.evaluator.close()
         server.stop()
     }
 

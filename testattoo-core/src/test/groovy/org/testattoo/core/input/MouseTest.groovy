@@ -25,15 +25,18 @@ import org.junit.jupiter.api.Test
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.testattoo.Server
+import org.testattoo.bundle.html5.Button
+import org.testattoo.bundle.html5.Div
+import org.testattoo.bundle.html5.Span
 import org.testattoo.core.Browser
-import org.testattoo.core.CssIdentifier
-import org.testattoo.core.component.Component
 import org.testattoo.core.component.Panel
 import org.testattoo.core.evaluator.WebDriverEvaluator
-import org.testattoo.core.support.property.TextSupport
 
+import static org.junit.jupiter.api.Assertions.fail
 import static org.testattoo.core.Testattoo.*
 import static org.testattoo.core.input.Key.*
+import static org.testattoo.core.input.MouseModifiers.DOUBLE
+import static org.testattoo.core.input.MouseModifiers.RIGHT
 
 /**
  * @author David Avenante (d.avenante@gmail.com)
@@ -59,7 +62,7 @@ class MouseTest {
 
     @AfterAll
     static void tearDown() {
-        driver.close()
+        config.evaluator.close()
         server.stop()
     }
 
@@ -193,28 +196,22 @@ class MouseTest {
         ['data'].click $('#_Ctrl_Shift_mouseleft') as Div
     }
 
-    @CssIdentifier('button,input[type=button]')
-    class Button extends org.testattoo.core.component.Button {
-        @Override
-        String text() {
-            config.evaluator.eval(this.id(), "it.is('input') ? it.val() : it.text().trim()")
+    @Test
+    @DisplayName("Should throw an error on invalid click sequence")
+    void should_throw_an_error_on_invalid_click_sequence() {
+        Button button = $('#button_1') as Button
+        try {
+            [CTRL, 'test', ALT].click button
+            fail()
+        } catch (IllegalArgumentException e) {
+            assert e.message == 'Cannot type a modifier after some text'
+        }
+
+        try {
+            config.evaluator.click('button_1', [RIGHT, DOUBLE], [])
+            fail()
+        } catch (IllegalArgumentException e) {
+            assert e.message == 'Invalid click sequence'
         }
     }
-
-    @CssIdentifier('span')
-    class Span extends Component implements TextSupport {
-        @Override
-        String text() {
-            config.evaluator.eval(id(), "it.text()")
-        }
-    }
-
-    @CssIdentifier('div')
-    class Div extends Panel {
-        @Override
-        String title() {
-            config.evaluator.eval(id(), "it.find('h1').text()")
-        }
-    }
-
 }

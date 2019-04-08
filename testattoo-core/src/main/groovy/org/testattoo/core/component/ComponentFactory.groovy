@@ -20,6 +20,7 @@ import org.testattoo.core.component.field.*
 import org.testattoo.core.internal.Identifiers
 
 import static org.testattoo.core.Testattoo.$$
+import static org.testattoo.core.internal.Identifiers.findSelectorsFor
 
 /**
  * @author David Avenante (d.avenante@gmail.com)
@@ -81,6 +82,6 @@ class ComponentFactory {
     }
 
     private static <T extends Component> List<T> collectAll(Class<T> clazz) {
-        Identifiers.findSelectorsFor(clazz).collectMany { $$(it.value, it.key) }
+        findSelectorsFor(clazz).collectMany { $$(it.value, it.key) } as List<T>
     }
 }
