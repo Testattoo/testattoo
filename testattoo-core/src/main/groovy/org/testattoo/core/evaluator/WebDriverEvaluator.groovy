@@ -40,6 +40,7 @@ class WebDriverEvaluator implements Evaluator {
 
     WebDriverEvaluator(WebDriver webDriver) {
         this.webDriver = webDriver
+
         this.js = (JavascriptExecutor) webDriver
     }
 

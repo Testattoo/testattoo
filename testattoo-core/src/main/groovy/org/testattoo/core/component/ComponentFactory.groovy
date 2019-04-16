@@ -74,14 +74,14 @@ class ComponentFactory {
 
     static WeekField weekField(String value) { field(value, WeekField) }
 
-    private static <T extends Field> T field(String value, Class<T> clazz) {
+    static <T extends Field> T field(String value, Class<T> clazz) {
         T field = collectAll(clazz).find { it.label() == value || it.placeholder() == value }
         if (field)
             return field
         throw new ComponentException("Unable to find " + clazz + " with label or placeholder equals to '" + value + "'")
     }
 
-    private static <T extends Component> List<T> collectAll(Class<T> clazz) {
+    static <T extends Component> List<T> collectAll(Class<T> clazz) {
         findSelectorsFor(clazz).collectMany { $$(it.value, it.key) } as List<T>
     }
 }

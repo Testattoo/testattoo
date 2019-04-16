@@ -272,7 +272,7 @@ class Testattoo {
         List<T> list() {
             if (components == null) {
                 components = meta.metaInfos().collect {
-                    new Component(new CachedMetaData(idProvider: new jQueryIdProvider("#${it.id}", false))).asType(type)
+                    new Component(new CachedMetaData(idProvider: new jQueryIdProvider("[id='${it.id}']", false))).asType(type)
                 } as List<T>
             }
             return Collections.unmodifiableList(components)

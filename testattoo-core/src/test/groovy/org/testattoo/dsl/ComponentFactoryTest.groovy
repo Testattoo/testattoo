@@ -191,7 +191,7 @@ class ComponentFactoryTest {
     }
 
     @Test
-    @DisplayName("SHould throw an error when component not found")
+    @DisplayName("Should throw an error when component not found")
     void should_throw_an_error_when_component_not_found() {
         config.evaluator = mock(Evaluator)
 
